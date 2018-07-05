@@ -29,14 +29,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mRef = new Firebase("https://fireapp-1e8cc.firebaseio.com/Users");
+        mRef = new Firebase("https://fireapp-1e8cc.firebaseio.com/Test");
         msend = (Button) findViewById(R.id.add);
         mValueField = (EditText) findViewById(R.id.ValueField);
         mListView = (ListView) findViewById(R.id.listview);
 
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://fireapp-1e8cc.firebaseio.com/");
-        Query query = databaseReference.child("Users");
+        Query query = databaseReference.child("Test");
         FirebaseListOptions<String> options = new FirebaseListOptions.Builder<String>()
                 .setQuery(query, String.class)
                 .setLayout(android.R.layout.simple_list_item_1)
