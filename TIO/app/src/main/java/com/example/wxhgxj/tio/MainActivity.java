@@ -3,12 +3,18 @@ package com.example.wxhgxj.tio;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.design.widget.NavigationView.OnNavigationItemSelectedListener;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.client.Firebase;
 import com.firebase.ui.database.FirebaseListAdapter;
@@ -18,13 +24,16 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
+import java.util.Objects;
+
 
 public class MainActivity extends AppCompatActivity {
 
+    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle mToggle;
     private Button msend;
     private EditText mValueField;
     private ListView mListView;
-    private Button mLogout;
     private Firebase mRef;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -36,12 +45,33 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mRef = new Firebase("https://fireapp-1e8cc.firebaseio.com/Test");
+        drawerLayout = (DrawerLayout)findViewById(R.id.drawerLayout);
+        mToggle = new ActionBarDrawerToggle(MainActivity.this, drawerLayout, R.string.open, R.string.close);
         msend = (Button)findViewById(R.id.add);
         mValueField = (EditText)findViewById(R.id.ValueField);
         mListView = (ListView)findViewById(R.id.listview);
-        mLogout = (Button)findViewById(R.id.logoutButton);
         mAuth = FirebaseAuth.getInstance();
 
+        mToggle.setDrawerIndicatorEnabled(true);
+        //add toggle to wave the drawLayout
+        drawerLayout.addDrawerListener(mToggle);
+        mToggle.syncState();
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        final NavigationView navigationView = (NavigationView)findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(new OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                Toast.makeText(MainActivity.this, "test", Toast.LENGTH_LONG).show();
+                switch(item.getItemId()) {
+                    case R.id.logoutButton:
+                        logout();
+                        break;
+                }
+                return true;
+            }
+        });
+        //initialize mAuth Listener
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -66,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
+        //button functions
         msend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,13 +106,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        mLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                logout();
-            }
-        });
 
+        //bind the listview with firebase listener
         mListView.setAdapter(firebaseListAdapter);
     }
 
@@ -94,6 +120,16 @@ public class MainActivity extends AppCompatActivity {
 
     private void logout() {
         mAuth.signOut();
-
+        Intent logoutIntent = new Intent(MainActivity.this, LoginActivity.class);
+        logoutIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(logoutIntent);
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(mToggle.onOptionsItemSelected(item))
+            return true;
+        return super.onOptionsItemSelected(item);
+    }
+
 }
