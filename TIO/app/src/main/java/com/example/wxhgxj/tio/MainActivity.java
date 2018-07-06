@@ -67,6 +67,10 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.logoutButton:
                         logout();
                         break;
+                    case R.id.usersButton:
+                        Intent usersIntent = new Intent(MainActivity.this, UsersActivity.class);
+                        usersIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(usersIntent);
                 }
                 return true;
             }
