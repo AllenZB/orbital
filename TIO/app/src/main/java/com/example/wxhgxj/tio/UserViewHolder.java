@@ -8,7 +8,7 @@ import org.w3c.dom.Text;
 
 public class UserViewHolder extends RecyclerView.ViewHolder {
 
-    View mView;
+    protected View mView;
 
     public UserViewHolder(View itemView) {
         super(itemView);

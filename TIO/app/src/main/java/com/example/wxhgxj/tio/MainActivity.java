@@ -61,8 +61,7 @@ public class MainActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(new OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-                Toast.makeText(MainActivity.this, "test", Toast.LENGTH_LONG).show();
+                //Toast.makeText(MainActivity.this, "test", Toast.LENGTH_LONG).show();
                 switch(item.getItemId()) {
                     case R.id.logoutButton:
                         logout();

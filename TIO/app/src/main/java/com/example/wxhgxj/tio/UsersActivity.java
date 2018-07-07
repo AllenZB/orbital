@@ -1,5 +1,6 @@
 package com.example.wxhgxj.tio;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -44,10 +45,21 @@ public class UsersActivity extends AppCompatActivity {
         firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<User, UserViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull UserViewHolder holder, int position, @NonNull User model) {
+                //bind the data to the textview in the single user layout
                 holder.setName(model.getName());
                 //Log.v("name", model.getName());
                 holder.setEmail(model.getEmail());
-                Toast.makeText(UsersActivity.this, model.getEmail(), Toast.LENGTH_LONG).show();
+                //get the id of the current view
+                final String userId = getRef(position).getKey();
+                //add the onclick function to the view
+                holder.mView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent profileIntent = new Intent(UsersActivity.this, UserProfileActivity.class);
+                        profileIntent.putExtra("userId", userId);
+                        startActivity(profileIntent);
+                    }
+                });
             }
 
             @NonNull
