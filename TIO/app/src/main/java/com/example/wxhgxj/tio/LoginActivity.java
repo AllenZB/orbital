@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -22,6 +23,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mLoginPassword;
     private Button mLoginButton;
     private Button mSignUpButton;
+    private ProgressBar loginProgress;
     //define firebase auth
     private FirebaseAuth mAuth;
 
@@ -35,6 +37,8 @@ public class LoginActivity extends AppCompatActivity {
         mLoginPassword = (EditText)findViewById(R.id.loginPassword);
         mLoginButton = (Button)findViewById(R.id.loginButton);
         mSignUpButton = (Button)findViewById(R.id.signupButton);
+        loginProgress = (ProgressBar)findViewById(R.id.loginProgress);
+        loginProgress.setVisibility(View.INVISIBLE);
         //initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
         //check whether is logged in already
@@ -42,6 +46,7 @@ public class LoginActivity extends AppCompatActivity {
         mLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                loginProgress.setVisibility(View.VISIBLE);
                 startSignIn();
             }
         });

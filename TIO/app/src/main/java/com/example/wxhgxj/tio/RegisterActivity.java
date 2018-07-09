@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import com.firebase.client.Firebase;
@@ -26,6 +27,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText registerEmail;
     private EditText registerPassword;
     private Button registerButton;
+    private ProgressBar registerProgress;
     //define Firebase Auth
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
@@ -39,6 +41,8 @@ public class RegisterActivity extends AppCompatActivity {
         registerEmail = (EditText)findViewById(R.id.registerEmail);
         registerPassword = (EditText)findViewById(R.id.registerPassword);
         registerButton = (Button)findViewById(R.id.registerButton);
+        registerProgress = (ProgressBar)findViewById(R.id.registerProgress);
+        registerProgress.setVisibility(View.INVISIBLE);
         //initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
@@ -47,6 +51,7 @@ public class RegisterActivity extends AppCompatActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                registerProgress.setVisibility(View.VISIBLE);
                 startRegister();
             }
         });

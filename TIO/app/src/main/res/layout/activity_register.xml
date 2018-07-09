@@ -47,4 +47,12 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="232dp"
         android:text="Register Now" />
+
+    <ProgressBar
+        android:id="@+id/registerProgress"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="89dp"
+        android:layout_height="85dp"
+        android:layout_centerInParent="true" />
+
 </RelativeLayout>
