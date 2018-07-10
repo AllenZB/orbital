@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.firebase.client.Firebase;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -72,12 +73,19 @@ public class RegisterActivity extends AppCompatActivity {
                         DatabaseReference currentUerIdDB = mDatabase.child(userId);
                         currentUerIdDB.child("Name").setValue(name);
                         currentUerIdDB.child("Email").setValue(email);
+                        registerProgress.setVisibility(View.GONE);
                         Intent mainIntent = new Intent(RegisterActivity.this, MainActivity.class);
                         mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(mainIntent);
+                    } else {
+                        registerProgress.setVisibility(View.GONE);
+                        Toast.makeText(RegisterActivity.this, "Some Errors Occur!", Toast.LENGTH_LONG).show();
                     }
                 }
             });
+        } else {
+            registerProgress.setVisibility(View.GONE);
+            Toast.makeText(RegisterActivity.this, "Fields Are Empty!", Toast.LENGTH_LONG).show();
         }
     }
 }

@@ -66,6 +66,7 @@ public class LoginActivity extends AppCompatActivity {
         String password = mLoginPassword.getText().toString();
         //prevent user from leaving the text-field blank
         if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
+            loginProgress.setVisibility(View.GONE);
             Toast.makeText(LoginActivity.this, "Fields Are Empty", Toast.LENGTH_LONG).show();
         } else {
             //proceed sign in operation
@@ -73,8 +74,10 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(!task.isSuccessful()) {
+                        loginProgress.setVisibility(View.GONE);
                         Toast.makeText(LoginActivity.this, "Sign In Problem", Toast.LENGTH_LONG).show();
                     }
+                    loginProgress.setVisibility(View.GONE);
                     Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
                     mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(mainIntent);

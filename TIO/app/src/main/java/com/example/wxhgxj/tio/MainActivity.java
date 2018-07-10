@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseListAdapter<String> firebaseListAdapter;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +71,17 @@ public class MainActivity extends AppCompatActivity {
                         Intent usersIntent = new Intent(MainActivity.this, UsersActivity.class);
                         usersIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(usersIntent);
+                        break;
+                    case R.id.chatButton:
+                        Intent chatSessionIntent = new Intent(MainActivity.this, ChatSessionActivity.class);
+                        chatSessionIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(chatSessionIntent);
+                        break;
+                    case R.id.settingButton:
+                        Intent settingIntent = new Intent(MainActivity.this, SettingActivity.class);
+                        settingIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(settingIntent);
+                        break;
                 }
                 return true;
             }

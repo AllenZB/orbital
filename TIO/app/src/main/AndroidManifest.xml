@@ -10,7 +10,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RegisterActivity">
+        <activity
+            android:name=".RegisterActivity"
+            android:parentActivityName=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
@@ -30,8 +32,17 @@
         <activity
             android:name=".UsersActivity"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".UserProfileActivity"
-            android:parentActivityName=".UsersActivity" ></activity>
+        <activity
+            android:name=".UserProfileActivity"
+            android:parentActivityName=".UsersActivity" />
+        <activity
+            android:name=".ChatSessionActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".SettingActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".UpdateSettingActivity"
+            android:parentActivityName=".SettingActivity" />
     </application>
 
 </manifest>

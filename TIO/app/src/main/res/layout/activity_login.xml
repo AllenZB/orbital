@@ -5,14 +5,14 @@
     android:id="@+id/relativeLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_blue_dark"
+    android:background="@color/browser_actions_text_color"
     tools:context=".LoginActivity">
 
     <EditText
         android:id="@+id/loginEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="43dp"
-        android:layout_marginTop="170dp"
+        android:layout_width="245dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="160dp"
         android:background="@color/browser_actions_bg_grey"
         android:ems="10"
         android:hint="Email..."
@@ -24,8 +24,8 @@
 
     <EditText
         android:id="@+id/loginPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="43dp"
+        android:layout_width="245dp"
+        android:layout_height="41dp"
         android:layout_marginTop="14dp"
         android:background="@color/browser_actions_bg_grey"
         android:ems="10"
@@ -38,7 +38,7 @@
 
     <Button
         android:id="@+id/loginButton"
-        android:layout_width="265dp"
+        android:layout_width="280dp"
         android:layout_height="40dp"
         android:layout_marginTop="8dp"
         android:background="#e9fd03"
@@ -50,7 +50,7 @@
 
     <Button
         android:id="@+id/signupButton"
-        android:layout_width="265dp"
+        android:layout_width="280dp"
         android:layout_height="40dp"
         android:layout_marginTop="30dp"
         android:background="#e9fd03"
@@ -64,7 +64,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="49dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="80dp"
         android:text="T I O"
         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Widget.ActionBar.Subtitle.Inverse"
         android:textSize="36sp"
