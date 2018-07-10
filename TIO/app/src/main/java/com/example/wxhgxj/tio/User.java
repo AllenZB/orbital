@@ -1,5 +1,7 @@
 package com.example.wxhgxj.tio;
 
+import java.util.HashMap;
+
 public class User {
 
 
@@ -7,6 +9,7 @@ public class User {
 
     private String Name;
     private String Email;
+    private HashMap<String, String> Contacts;
 
     public User() {
 
@@ -33,5 +36,11 @@ public class User {
         Email = email;
     }
 
+    public HashMap<String, String> getContacts() {
+        return Contacts;
+    }
 
+    public void setContacts(HashMap<String, String> contacts) {
+        this.Contacts = contacts;
+    }
 }

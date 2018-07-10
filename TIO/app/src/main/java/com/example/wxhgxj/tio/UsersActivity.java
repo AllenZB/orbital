@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
@@ -55,9 +56,15 @@ public class UsersActivity extends AppCompatActivity {
                 holder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent profileIntent = new Intent(UsersActivity.this, UserProfileActivity.class);
-                        profileIntent.putExtra("userId", userId);
-                        startActivity(profileIntent);
+                        if(userId.equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                            Intent settingIntent = new Intent(UsersActivity.this, SettingActivity.class);
+                            settingIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(settingIntent);
+                        } else {
+                            Intent profileIntent = new Intent(UsersActivity.this, UserProfileActivity.class);
+                            profileIntent.putExtra("userId", userId);
+                            startActivity(profileIntent);
+                        }
                     }
                 });
             }
