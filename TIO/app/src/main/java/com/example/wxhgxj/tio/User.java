@@ -9,7 +9,7 @@ public class User {
 
     private String Name;
     private String Email;
-    private HashMap<String, String> Contacts;
+    private HashMap<String, Contacts> Contacts;
 
     public User() {
 
@@ -36,11 +36,11 @@ public class User {
         Email = email;
     }
 
-    public HashMap<String, String> getContacts() {
+    public HashMap<String, Contacts> getContacts() {
         return Contacts;
     }
 
-    public void setContacts(HashMap<String, String> contacts) {
+    public void setContacts(HashMap<String, Contacts> contacts) {
         this.Contacts = contacts;
     }
 }

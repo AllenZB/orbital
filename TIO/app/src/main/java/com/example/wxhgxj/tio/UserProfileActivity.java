@@ -99,7 +99,7 @@ public class UserProfileActivity extends AppCompatActivity {
                     inContact = false;
                 } else {
                     String time = Calendar.getInstance().getTime().toString();
-                    contactsDatabase.child(selectedUserId).setValue(time);
+                    contactsDatabase.child(selectedUserId).child("Time").setValue(time);
                     String newText = "Remove from contacts";
                     contactOption.setText(newText);
                     inContact = true;
