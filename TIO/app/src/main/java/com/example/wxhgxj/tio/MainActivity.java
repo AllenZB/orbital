@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private ListView mListView;
     private Firebase mRef;
     private FirebaseAuth mAuth;
+    private DatabaseReference currentUserDB;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseListAdapter<String> firebaseListAdapter;
 
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         mValueField = (EditText)findViewById(R.id.ValueField);
         mListView = (ListView)findViewById(R.id.listview);
         mAuth = FirebaseAuth.getInstance();
+        currentUserDB = FirebaseDatabase.getInstance().getReference("Users").child(mAuth.getCurrentUser().getUid());
 
         mToggle.setDrawerIndicatorEnabled(true);
         //add toggle to wave the drawLayout
@@ -131,6 +133,7 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         mAuth.addAuthStateListener(mAuthListener);
         firebaseListAdapter.startListening();
+        currentUserDB.child("online").setValue(true);
     }
 
     private void logout() {
@@ -138,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
         Intent logoutIntent = new Intent(MainActivity.this, LoginActivity.class);
         logoutIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(logoutIntent);
+        currentUserDB.child("online").setValue(false);
     }
 
     @Override

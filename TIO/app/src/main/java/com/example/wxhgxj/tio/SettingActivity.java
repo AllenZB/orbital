@@ -39,6 +39,7 @@ public class SettingActivity extends AppCompatActivity {
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         String currentUid = currentUser.getUid();
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUid);
+        databaseReference.keepSynced(true);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
