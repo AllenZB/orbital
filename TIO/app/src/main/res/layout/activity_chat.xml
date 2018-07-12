@@ -8,20 +8,29 @@
     tools:context=".ChatActivity">
 
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/messageView"
+        android:layout_width="match_parent"
+        android:layout_height="613dp"
+        android:layout_above="@+id/sendMessageBar"
+        android:layout_alignParentEnd="true" />
+
     <LinearLayout
+        android:id="@+id/sendMessageBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:orientation="horizontal">
 
-        <TextView
+        <EditText
             android:id="@+id/chatMessage"
-            android:layout_width="353dp"
-            android:layout_height="match_parent"
+            android:layout_width="356dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="TextView"
-            android:textSize="24sp" />
+            android:ems="10"
+            android:hint="Message..."
+            android:inputType="textPersonName" />
 
         <ImageButton
             android:id="@+id/sendMessageButton"

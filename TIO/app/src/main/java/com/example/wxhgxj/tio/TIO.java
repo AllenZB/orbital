@@ -15,6 +15,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+import java.util.TimeZone;
+
 public class TIO extends Application {
 
     private DatabaseReference mUsersDB;
@@ -43,7 +49,11 @@ public class TIO extends Application {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if(dataSnapshot != null) {
                         Log.v("UID", currentUid);
-                        currentUserDB.child("online").onDisconnect().setValue(ServerValue.TIMESTAMP);
+                        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        df.setTimeZone(Calendar.getInstance().getTimeZone());
+                        df.setTimeZone(TimeZone.getTimeZone("Asia/Singapore"));
+                        String date = df.format(Calendar.getInstance().getTime());
+                        currentUserDB.child("online").onDisconnect().setValue(date);
                     }
                 }
                 @Override

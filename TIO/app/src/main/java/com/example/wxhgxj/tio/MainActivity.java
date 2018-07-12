@@ -24,7 +24,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 import java.util.Objects;
+import java.util.TimeZone;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -141,7 +146,12 @@ public class MainActivity extends AppCompatActivity {
         Intent logoutIntent = new Intent(MainActivity.this, LoginActivity.class);
         logoutIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(logoutIntent);
-        currentUserDB.child("online").setValue(ServerValue.TIMESTAMP);
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        df.setTimeZone(Calendar.getInstance().getTimeZone());
+        //as the time zone for the ADK is not correct
+        df.setTimeZone(TimeZone.getTimeZone("Asia/Singapore"));
+        String date = df.format(Calendar.getInstance().getTime());
+        currentUserDB.child("online").setValue(date);
     }
 
     @Override
