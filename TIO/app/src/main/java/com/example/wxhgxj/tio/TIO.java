@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.firebase.client.Firebase;
+import com.firebase.client.ServerValue;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -42,7 +43,7 @@ public class TIO extends Application {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if(dataSnapshot != null) {
                         Log.v("UID", currentUid);
-                        currentUserDB.child("online").onDisconnect().setValue(false);
+                        currentUserDB.child("online").onDisconnect().setValue(ServerValue.TIMESTAMP);
                     }
                 }
                 @Override

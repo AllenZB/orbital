@@ -1,6 +1,7 @@
 package com.example.wxhgxj.tio;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
@@ -77,13 +78,22 @@ public class ContactsFragment extends Fragment {
                 mUsersDB.child(listUid).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        String name = dataSnapshot.child("Name").getValue().toString();
+                        final String name = dataSnapshot.child("Name").getValue().toString();
                         String email = dataSnapshot.child("Email").getValue().toString();
-                        boolean onlineStatus = (boolean)dataSnapshot.child("online").getValue();
+                        String onlineStatus = dataSnapshot.child("online").getValue().toString();
                         //bind the data to the textview in the single user layout
                         currentHolder.setName(name);
                         currentHolder.setEmail(email);
                         currentHolder.setContactOnline(onlineStatus);
+                        currentHolder.mView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Intent chatIntent = new Intent(getContext(), ChatActivity.class);
+                                chatIntent.putExtra("uid", listUid);
+                                chatIntent.putExtra("chatUserName", name);
+                                startActivity(chatIntent);
+                            }
+                        });
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {

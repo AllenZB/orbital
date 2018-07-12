@@ -14,9 +14,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.firebase.client.Firebase;
+import com.firebase.client.ServerValue;
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.firebase.ui.database.FirebaseListOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(usersIntent);
                         break;
                     case R.id.chatButton:
-                        Intent chatSessionIntent = new Intent(MainActivity.this, ChatSessionActivity.class);
+                        Intent chatSessionIntent = new Intent(MainActivity.this, ChatSectionActivity.class);
                         chatSessionIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(chatSessionIntent);
                         break;
@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         mAuth.addAuthStateListener(mAuthListener);
         firebaseListAdapter.startListening();
-        currentUserDB.child("online").setValue(true);
+        currentUserDB.child("online").setValue("true");
     }
 
     private void logout() {
@@ -141,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
         Intent logoutIntent = new Intent(MainActivity.this, LoginActivity.class);
         logoutIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(logoutIntent);
-        currentUserDB.child("online").setValue(false);
+        currentUserDB.child("online").setValue(ServerValue.TIMESTAMP);
     }
 
     @Override

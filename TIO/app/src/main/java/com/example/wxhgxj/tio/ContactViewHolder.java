@@ -32,9 +32,9 @@ public class ContactViewHolder extends RecyclerView.ViewHolder {
         contactTime.setText(time);
     }
 
-    public void setContactOnline(boolean onlineStatus) {
+    public void setContactOnline(String onlineStatus) {
         ImageView contactOnline = (ImageView)mView.findViewById(R.id.contactOnline);
-        if(onlineStatus) {
+        if(onlineStatus.equals("true")) {
             contactOnline.setVisibility(View.VISIBLE);
         } else {
             contactOnline.setVisibility(View.INVISIBLE);

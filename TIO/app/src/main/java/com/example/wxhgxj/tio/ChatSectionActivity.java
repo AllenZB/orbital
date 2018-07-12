@@ -5,7 +5,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class ChatSessionActivity extends AppCompatActivity {
+public class ChatSectionActivity extends AppCompatActivity {
 
     private ChatPagerAdapter mChatPagerAdapter;
     private ViewPager mViewPager;
@@ -21,6 +21,7 @@ public class ChatSessionActivity extends AppCompatActivity {
         mViewPager.setAdapter(mChatPagerAdapter);
         mTabLayout = (TabLayout)findViewById(R.id.chatTabs);
         mTabLayout.setupWithViewPager(mViewPager);
+
     }
 
 }
