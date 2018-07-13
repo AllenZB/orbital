@@ -4,6 +4,7 @@ import android.content.Context;
 import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -27,6 +28,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
@@ -54,6 +56,10 @@ public class ChatActivity extends AppCompatActivity {
     private List<Message> messageList = new ArrayList<>();
     private LinearLayoutManager linearLayoutManager;
     private MessageAdapter messageAdapter;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    //limit the num of the message in each load;
+    final private int pageMessageLimit = 15;
+    private int currentPageIndex = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,6 +136,18 @@ public class ChatActivity extends AppCompatActivity {
         });
         //initialize the message related widgets
         chatMsg = (EditText)findViewById(R.id.chatMessage);
+        //initialize the swipe refresh layout
+        swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.messageSwipe);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                //increment the page index
+                currentPageIndex ++;
+                //prevent load show the msg repeatedly
+                messageList.clear();
+                loadMessage();
+            }
+        });
         ImageButton sendMsg = (ImageButton)findViewById(R.id.sendMessageButton);
         //the onclick function for send button
         sendMsg.setOnClickListener(new View.OnClickListener() {
@@ -141,23 +159,26 @@ public class ChatActivity extends AppCompatActivity {
         //initialize the message list
         messageView = (RecyclerView)findViewById(R.id.messageView);
         linearLayoutManager = new LinearLayoutManager(this);
+        //messageList.clear();
         loadMessage();
         messageView.setHasFixedSize(true);
         messageView.setLayoutManager(linearLayoutManager);
         messageAdapter = new MessageAdapter(messageList);
         messageView.setAdapter(messageAdapter);
-
-
-
     }
 
     private void loadMessage() {
-        rootRef.child("Messages").child(currentUid).child(chatUserID).addChildEventListener(new ChildEventListener() {
+        Query msgQuery = rootRef.child("Messages").child(currentUid).child(chatUserID)
+                .limitToLast(currentPageIndex * pageMessageLimit);
+        msgQuery.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Message msg = dataSnapshot.getValue(Message.class);
                 messageList.add(msg);
                 messageAdapter.notifyDataSetChanged();
+                messageView.scrollToPosition(messageList.size() - 1);
+                //stop refreshing and make the turing ring disappear
+                swipeRefreshLayout.setRefreshing(false);
             }
 
             @Override
@@ -167,7 +188,9 @@ public class ChatActivity extends AppCompatActivity {
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
+                Message msg = dataSnapshot.getValue(Message.class);
+                messageList.remove(msg);
+                messageAdapter.notifyDataSetChanged();
             }
             @Override
             public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
@@ -195,6 +218,7 @@ public class ChatActivity extends AppCompatActivity {
             messageAddMap.put("seen", false);
             messageAddMap.put("type", "text");
             messageAddMap.put("time", getCurrentTime());
+            messageAddMap.put("from", currentUid);
             //set the messages add user map
             Map messageAddUserMap = new HashMap();
             messageAddUserMap.put(currentUserRef + "/" + pushId, messageAddMap);

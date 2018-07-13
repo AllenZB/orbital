@@ -26,4 +26,9 @@ public class MessageViewHolder extends RecyclerView.ViewHolder {
         TextView msgContent = (TextView)mView.findViewById(R.id.messageContent);
         msgContent.setText(content);
     }
+
+    public TextView getMsgContentTextView() {
+        TextView msgContent = (TextView)mView.findViewById(R.id.messageContent);
+        return msgContent;
+    }
 }

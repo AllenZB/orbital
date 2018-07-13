@@ -5,12 +5,14 @@ public class Message {
     private String time;
     private String type;
     private boolean seen;
+    private String from;
 
-    public Message(String content, String time, String type, boolean seen) {
+    public Message(String content, String time, String type, boolean seen, String from) {
         this.content = content;
         this.time = time;
         this.type = type;
         this.seen = seen;
+        this.from = from;
     }
 
     public Message() {}
@@ -46,4 +48,13 @@ public class Message {
     public void setSeen(boolean seen) {
         this.seen = seen;
     }
+
+    public String getFrom() {
+        return from;
+    }
+
+    public void setFrom(String from) {
+        this.from = from;
+    }
+
 }
