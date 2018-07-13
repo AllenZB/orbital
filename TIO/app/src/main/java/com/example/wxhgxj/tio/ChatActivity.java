@@ -60,6 +60,11 @@ public class ChatActivity extends AppCompatActivity {
     //limit the num of the message in each load;
     final private int pageMessageLimit = 15;
     private int currentPageIndex = 1;
+    private String lastMsgID;
+    private String preLastMsgID;
+    private int msgIndex = 0;
+    private int positionCount;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,8 +149,9 @@ public class ChatActivity extends AppCompatActivity {
                 //increment the page index
                 currentPageIndex ++;
                 //prevent load show the msg repeatedly
-                messageList.clear();
-                loadMessage();
+                positionCount = 0;
+                msgIndex = 0;
+                loadMessage(false);
             }
         });
         ImageButton sendMsg = (ImageButton)findViewById(R.id.sendMessageButton);
@@ -160,23 +166,58 @@ public class ChatActivity extends AppCompatActivity {
         messageView = (RecyclerView)findViewById(R.id.messageView);
         linearLayoutManager = new LinearLayoutManager(this);
         //messageList.clear();
-        loadMessage();
+        loadMessage(true);
         messageView.setHasFixedSize(true);
         messageView.setLayoutManager(linearLayoutManager);
         messageAdapter = new MessageAdapter(messageList);
         messageView.setAdapter(messageAdapter);
     }
 
-    private void loadMessage() {
-        Query msgQuery = rootRef.child("Messages").child(currentUid).child(chatUserID)
-                .limitToLast(currentPageIndex * pageMessageLimit);
+    private void loadMessage(final boolean isFirstLoad) {
+        Query msgQuery;
+        if(isFirstLoad) {
+            msgQuery = rootRef.child("Messages").child(currentUid).child(chatUserID)
+                    .limitToLast(currentPageIndex * pageMessageLimit);
+        } else {
+            msgQuery = rootRef.child("Messages").child(currentUid).child(chatUserID)
+                    .orderByKey().endAt(lastMsgID).limitToLast(pageMessageLimit);
+        }
         msgQuery.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Message msg = dataSnapshot.getValue(Message.class);
-                messageList.add(msg);
-                messageAdapter.notifyDataSetChanged();
-                messageView.scrollToPosition(messageList.size() - 1);
+                if(isFirstLoad) {
+                    messageList.add(msg);
+                    msgIndex ++;
+                    if(msgIndex == 1) {
+                        //record the last message loaded which is the earliest message in the current list
+                        lastMsgID = dataSnapshot.getKey();
+                        //store the last Message ID, preLastMsgID is for reload
+                        preLastMsgID = lastMsgID;
+                    }
+                    positionCount ++;
+                    messageAdapter.notifyDataSetChanged();
+                    //scroll to the bottom
+                    messageView.scrollToPosition(messageList.size() - 1);
+                } else {
+                    //prevent the repeated record
+                    if(!dataSnapshot.getKey().equals(preLastMsgID)) {
+                        messageList.add(msgIndex, msg);
+                    } else {
+                        preLastMsgID = lastMsgID;
+                    }
+                    //count the msg index to make sure the index is changing
+                    msgIndex ++;
+                    if(msgIndex == 1) {
+                        lastMsgID = dataSnapshot.getKey();
+                    }
+                    //Log.v("position", positionCount + "");
+                    messageAdapter.notifyDataSetChanged();
+                    //keep the earliest not reloaded record to the top, show one new record
+                    linearLayoutManager.scrollToPositionWithOffset(positionCount - 1, 0);
+                    //count the position start from 0, increase the position
+                    positionCount ++;
+                }
                 //stop refreshing and make the turing ring disappear
                 swipeRefreshLayout.setRefreshing(false);
             }
@@ -185,7 +226,6 @@ public class ChatActivity extends AppCompatActivity {
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
             }
-
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
                 Message msg = dataSnapshot.getValue(Message.class);
@@ -196,7 +236,6 @@ public class ChatActivity extends AppCompatActivity {
             public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
