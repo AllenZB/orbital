@@ -71,7 +71,7 @@ public class ContactsFragment extends Fragment {
 
             @Override
             protected void onBindViewHolder(@NonNull ContactViewHolder holder, int position, @NonNull Contacts model) {
-                //get the id of the current view
+                //get the id of the current item
                 final String listUid = getRef(position).getKey();
                 final ContactViewHolder currentHolder = holder;
                 holder.setTime(model.getTime());
