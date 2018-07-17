@@ -6,6 +6,9 @@
         android:id="@+id/settingButton"
         android:title="Setting"></item>
     <item
+        android:id="@+id/calendarButton"
+        android:title="Calendar" />
+    <item
         android:id="@+id/usersButton"
         android:title="All Users"></item>
     <item

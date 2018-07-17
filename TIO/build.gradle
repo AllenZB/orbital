@@ -18,6 +18,8 @@ allprojects {
     repositories {
         google()
         jcenter()
+        //use the material calendar view
+        maven { url 'https://jitpack.io' }
     }
 }
 

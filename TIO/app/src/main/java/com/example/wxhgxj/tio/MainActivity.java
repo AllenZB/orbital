@@ -89,6 +89,11 @@ public class MainActivity extends AppCompatActivity {
                         settingIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(settingIntent);
                         break;
+                    case R.id.calendarButton:
+                        Intent calendarIntent = new Intent(MainActivity.this, CalendarActivity.class);
+                        calendarIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(calendarIntent);
+                        break;
                 }
                 return true;
             }
@@ -117,7 +122,6 @@ public class MainActivity extends AppCompatActivity {
                 textView.setText(model);
             }
         };
-
         //button functions
         msend.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,8 +131,6 @@ public class MainActivity extends AppCompatActivity {
                 mRef.push().setValue(value);  //generate a unique and random child key
             }
         });
-
-
         //bind the listview with firebase listener
         mListView.setAdapter(firebaseListAdapter);
     }

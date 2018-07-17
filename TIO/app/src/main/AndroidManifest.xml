@@ -46,7 +46,8 @@
             android:parentActivityName=".SettingActivity" />
         <activity
             android:name=".ChatActivity"
-            android:parentActivityName=".ChatSectionActivity"/>
+            android:parentActivityName=".ChatSectionActivity" />
+        <activity android:name=".CalendarActivity"></activity>
     </application>
 
 </manifest>

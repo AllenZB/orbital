@@ -1,5 +1,5 @@
 package com.example.wxhgxj.tio;
-
+//this one is the activity responding to the real chatting functionality
 
 import android.content.Intent;
 import android.os.Bundle;
