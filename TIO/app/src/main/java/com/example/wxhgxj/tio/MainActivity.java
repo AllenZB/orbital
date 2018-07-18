@@ -94,6 +94,11 @@ public class MainActivity extends AppCompatActivity {
                         calendarIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(calendarIntent);
                         break;
+                    case R.id.testButton:
+                        Intent newEventIntent = new Intent(MainActivity.this, AddEventActivity.class);
+                        newEventIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(newEventIntent);
+                        break;
                 }
                 return true;
             }
