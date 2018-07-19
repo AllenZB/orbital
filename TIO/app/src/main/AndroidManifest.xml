@@ -48,12 +48,13 @@
             android:name=".ChatActivity"
             android:parentActivityName=".ChatSectionActivity" />
         <activity android:name=".CalendarActivity"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity" />
         <activity android:name=".EventsActivity"
-            android:parentActivityName=".CalendarActivity"/>
-        <activity android:name=".UpdateEventActivity" />
+            android:parentActivityName=".CalendarActivity" />
+        <activity android:name=".UpdateEventActivity"
+            android:parentActivityName=".CalendarActivity" />
         <activity android:name=".AddEventActivity"
-            android:parentActivityName=".CalendarActivity"/>
+            android:parentActivityName=".CalendarActivity" />
     </application>
 
 </manifest>

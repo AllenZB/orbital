@@ -73,6 +73,7 @@ public class EventsActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         Intent updateEventIntent = new Intent(EventsActivity.this, UpdateEventActivity.class);
                         updateEventIntent.putExtra("eventID", currentEventID);
+                        setIntentExtra(updateEventIntent);
                         updateEventIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(updateEventIntent);
                     }
@@ -98,14 +99,7 @@ public class EventsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent addEventIntent = new Intent(EventsActivity.this, AddEventActivity.class);
-                String type = getIntent().getStringExtra("Query");
-                if(type.equals("Date")) {
-                    addEventIntent.putExtra("Query", type);
-                    addEventIntent.putExtra("Date", getIntent().getStringExtra("Date"));
-                }else {
-                    addEventIntent.putExtra("Query", type);
-                    addEventIntent.putExtra("Date", getIntent().getStringExtra("Month"));
-                }
+                setIntentExtra(addEventIntent);
                 addEventIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(addEventIntent);
             }
@@ -116,5 +110,16 @@ public class EventsActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         firebaseRecyclerAdapter.startListening();
+    }
+
+    private void setIntentExtra(Intent intent) {
+        String type = getIntent().getStringExtra("Query");
+        if(type.equals("Date")) {
+            intent.putExtra("Query", type);
+            intent.putExtra("Date", getIntent().getStringExtra("Date"));
+        }else {
+            intent.putExtra("Query", type);
+            intent.putExtra("Month", getIntent().getStringExtra("Month"));
+        }
     }
 }
