@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/todoContent"
+        android:layout_width="321dp"
+        android:layout_height="63dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:text="TextView"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/editTodobutton"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:text="Edit" />
+
+    <Button
+        android:id="@+id/doneTodoButton"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_alignBottom="@+id/todoContent"
+        android:layout_alignParentEnd="true"
+        android:text="Done" />
+
+    <EditText
+        android:id="@+id/newTodoContent"
+        android:layout_width="321dp"
+        android:layout_height="64dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/todoContent"
+        android:ems="10"
+        android:hint="new Content..."
+        android:inputType="textPersonName"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/updateTodoEvent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/newTodoContent"
+        android:layout_alignParentEnd="true"
+        android:text="Update"
+        android:visibility="gone" />
+</RelativeLayout>

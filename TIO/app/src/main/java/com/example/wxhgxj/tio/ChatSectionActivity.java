@@ -21,7 +21,6 @@ public class ChatSectionActivity extends AppCompatActivity {
         mViewPager.setAdapter(mChatPagerAdapter);
         mTabLayout = (TabLayout)findViewById(R.id.chatTabs);
         mTabLayout.setupWithViewPager(mViewPager);
-
     }
 
 }

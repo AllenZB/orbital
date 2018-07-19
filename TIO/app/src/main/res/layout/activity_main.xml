@@ -15,37 +15,13 @@
         tools:context=".MainActivity">
 
 
-        <Button
-            android:id="@+id/add"
+        <android.support.v4.view.ViewPager
+            android:id="@+id/mainViewPager"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="99dp"
-            android:elevation="0dp"
-            android:text="Add value to Firebase"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
-
-        <EditText
-            android:id="@+id/ValueField"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="41dp"
-            android:ems="10"
-            android:hint="Value..."
-            android:inputType="textPersonName" />
-
-        <ListView
-            android:id="@+id/listview"
-            android:layout_width="match_parent"
-            android:layout_height="402dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="165dp" />
-
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="0dp" />
     </RelativeLayout>
 
     <android.support.design.widget.NavigationView

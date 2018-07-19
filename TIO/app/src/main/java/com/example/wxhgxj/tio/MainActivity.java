@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.NavigationView.OnNavigationItemSelectedListener;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -36,35 +38,31 @@ public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle mToggle;
-    private Button msend;
-    private EditText mValueField;
-    private ListView mListView;
-    private Firebase mRef;
     private FirebaseAuth mAuth;
     private DatabaseReference currentUserDB;
     private FirebaseAuth.AuthStateListener mAuthListener;
-    private FirebaseListAdapter<String> firebaseListAdapter;
-
+    private MainPagerAdapter mainPagerAdapter;
+    private ViewPager mainViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        mRef = new Firebase("https://fireapp-1e8cc.firebaseio.com/Test");
         drawerLayout = (DrawerLayout)findViewById(R.id.drawerLayout);
         mToggle = new ActionBarDrawerToggle(MainActivity.this, drawerLayout, R.string.open, R.string.close);
-        msend = (Button)findViewById(R.id.add);
-        mValueField = (EditText)findViewById(R.id.ValueField);
-        mListView = (ListView)findViewById(R.id.listview);
         mAuth = FirebaseAuth.getInstance();
         currentUserDB = FirebaseDatabase.getInstance().getReference("Users").child(mAuth.getCurrentUser().getUid());
-
         mToggle.setDrawerIndicatorEnabled(true);
         //add toggle to wave the drawLayout
         drawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        mainPagerAdapter = new MainPagerAdapter(getSupportFragmentManager());
+        mainViewPager = (ViewPager)findViewById(R.id.mainViewPager);
+        mainViewPager.setAdapter(mainPagerAdapter);
+
+
+        //set the navigation bar
         final NavigationView navigationView = (NavigationView)findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(new OnNavigationItemSelectedListener() {
             @Override
@@ -103,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-        //initialize mAuth Listener
+        //initialize mAuth Listener direct to login page
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -114,37 +112,13 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         };
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://fireapp-1e8cc.firebaseio.com/");
-        Query query = databaseReference.child("Test");
-        FirebaseListOptions<String> options = new FirebaseListOptions.Builder<String>()
-                .setQuery(query, String.class)
-                .setLayout(android.R.layout.simple_list_item_1)
-                .build();
-        firebaseListAdapter = new FirebaseListAdapter<String>(options) {
-            @Override
-            protected void populateView(View v, String model, int position) {
-                TextView textView = (TextView) v.findViewById(android.R.id.text1);
-                textView.setText(model);
-            }
-        };
-        //button functions
-        msend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String value = mValueField.getText().toString();
-                //Firebase mRefChild = mRef.child("Name");  add value to the specific child
-                mRef.push().setValue(value);  //generate a unique and random child key
-            }
-        });
-        //bind the listview with firebase listener
-        mListView.setAdapter(firebaseListAdapter);
+
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         mAuth.addAuthStateListener(mAuthListener);
-        firebaseListAdapter.startListening();
         currentUserDB.child("online").setValue("true");
     }
 
