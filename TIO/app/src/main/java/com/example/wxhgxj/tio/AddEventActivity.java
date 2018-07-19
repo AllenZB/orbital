@@ -1,5 +1,6 @@
 package com.example.wxhgxj.tio;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -65,6 +66,17 @@ public class AddEventActivity extends AppCompatActivity {
                         if(databaseError != null) {
                             Log.d("EventLog", databaseError.getMessage().toString());
                         } else {
+                            Intent eventsIntent = new Intent(AddEventActivity.this, EventsActivity.class);
+                            String type = getIntent().getStringExtra("Query");
+                            if(type.equals("Date")) {
+                                eventsIntent.putExtra("Query", type);
+                                eventsIntent.putExtra("Date", getIntent().getStringExtra("Date"));
+                            } else {
+                                eventsIntent.putExtra("Query", type);
+                                eventsIntent.putExtra("Month", getIntent().getStringExtra("Month"));
+                            }
+                            eventsIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(eventsIntent);
                         }
                     }
                 });

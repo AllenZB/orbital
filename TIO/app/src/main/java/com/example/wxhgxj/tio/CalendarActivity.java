@@ -3,9 +3,11 @@ package com.example.wxhgxj.tio;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -29,6 +31,7 @@ public class CalendarActivity extends AppCompatActivity {
     private MaterialCalendarView calendar;
     private Collection<CalendarDay> dates= new ArrayList<>();
     private DatabaseReference eventRef;
+    private int currentMonthIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +50,7 @@ public class CalendarActivity extends AppCompatActivity {
         dates.add(new CalendarDay(today));
         calendar.addDecorator(new EventDecorator(Color.BLUE, dates));
         dates.clear();
+        currentMonthIndex = today.getMonth();
         calendar.setOnDateChangedListener(new OnDateSelectedListener() {
             @Override
             public void onDateSelected(@NonNull MaterialCalendarView materialCalendarView, @NonNull CalendarDay calendarDay, boolean b) {
@@ -64,6 +68,18 @@ public class CalendarActivity extends AppCompatActivity {
             @Override
             public void onMonthChanged(MaterialCalendarView materialCalendarView, CalendarDay calendarDay) {
                 Log.v("month change", calendarDay.getMonth() + "");
+                currentMonthIndex = calendarDay.getMonth();
+            }
+        });
+        calendar.setOnTitleClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent eventsIntent = new Intent(CalendarActivity.this, EventsActivity.class);
+                //pass to events activity to show the events on that month
+                eventsIntent.putExtra("Query", "Month");
+                eventsIntent.putExtra("Month", currentMonthIndex + "");
+                eventsIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(eventsIntent);
             }
         });
     }

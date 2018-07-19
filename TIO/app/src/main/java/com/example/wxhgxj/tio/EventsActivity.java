@@ -46,10 +46,11 @@ public class EventsActivity extends AppCompatActivity {
         String type = getIntent().getStringExtra("Query");
         if(type.equals("Date")) {
             String date = getIntent().getStringExtra("Date");
-            query = rootRef.child("Events").child(currentUid);
+            query = rootRef.child("Events").child(currentUid).orderByChild("Date").equalTo(date);
         } else {
             String month = getIntent().getStringExtra("Month");
-            query = rootRef.child("Events").child(currentUid).orderByChild("Month").equalTo(month);
+            int monthIndex = Integer.parseInt(month);
+            query = rootRef.child("Events").child(currentUid).orderByChild("Month").equalTo(monthIndex);
         }
         FirebaseRecyclerOptions<Event> options = new FirebaseRecyclerOptions.Builder<Event>()
                 .setQuery(query, Event.class)
@@ -97,6 +98,14 @@ public class EventsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent addEventIntent = new Intent(EventsActivity.this, AddEventActivity.class);
+                String type = getIntent().getStringExtra("Query");
+                if(type.equals("Date")) {
+                    addEventIntent.putExtra("Query", type);
+                    addEventIntent.putExtra("Date", getIntent().getStringExtra("Date"));
+                }else {
+                    addEventIntent.putExtra("Query", type);
+                    addEventIntent.putExtra("Date", getIntent().getStringExtra("Month"));
+                }
                 addEventIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(addEventIntent);
             }
