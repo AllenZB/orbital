@@ -42,9 +42,18 @@
     <Button
         android:id="@+id/updateTodoEvent"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/newTodoContent"
+        android:layout_height="35dp"
+        android:layout_alignBottom="@+id/newTodoContent"
         android:layout_alignParentEnd="true"
         android:text="Update"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/cancelTodoInput"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/todoContent"
+        android:text="Cancel"
         android:visibility="gone" />
 </RelativeLayout>

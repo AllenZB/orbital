@@ -10,32 +10,71 @@ import android.widget.TextView;
 public class TodoViewHolder extends RecyclerView.ViewHolder{
 
     private View todoView;
+    private TextView todoContent;
+    private Button editButton;
+    private Button doneButton;
+    private EditText newTodoContent;
+    private Button updateButton;
+    private Button cancelButton;
 
     public TodoViewHolder(View itemView) {
         super(itemView);
 
         todoView = itemView;
+        todoContent = (TextView)todoView.findViewById(R.id.todoContent);
+        editButton = (Button)todoView.findViewById(R.id.editTodobutton);
+        doneButton = (Button)todoView.findViewById(R.id.doneTodoButton);
+        newTodoContent = (EditText)todoView.findViewById(R.id.newTodoContent);
+        updateButton = (Button)todoView.findViewById(R.id.updateTodoEvent);
+        cancelButton = (Button)todoView.findViewById(R.id.cancelTodoInput);
     }
 
     public void setContent(String content) {
-        TextView todoContent = (TextView) todoView.findViewById(R.id.todoContent);
         todoContent.setText(content);
     }
 
     public Button getEditButton() {
-        return (Button)todoView.findViewById(R.id.editTodobutton);
+        return editButton;
     }
 
     public Button getDoneButton() {
-        return (Button)todoView.findViewById(R.id.doneTodoButton);
+        return doneButton;
     }
 
-    public void showUpdateContent() {
-        todoView.findViewById(R.id.newTodoContent).setVisibility(View.VISIBLE);
+    public EditText getNewTodoContent() {
+        return newTodoContent;
     }
 
-    public void hideUpdateContent() {
-        todoView.findViewById(R.id.newTodoContent).setVisibility(View.GONE);
+    public Button getUpdateButton() {
+        return updateButton;
+    }
+
+    public Button getCancelButton() {
+        return cancelButton;
+    }
+
+    public void hideUpdate() {
+        newTodoContent.setVisibility(View.GONE);
+        updateButton.setVisibility(View.GONE);
+        cancelButton.setVisibility(View.GONE);
+    }
+
+    public void showUpdate() {
+        newTodoContent.setVisibility(View.VISIBLE);
+        updateButton.setVisibility(View.VISIBLE);
+        cancelButton.setVisibility(View.VISIBLE);
+    }
+
+    public void hideDisplay() {
+        todoContent.setVisibility(View.GONE);
+        editButton.setVisibility(View.GONE);
+        doneButton.setVisibility(View.GONE);
+    }
+
+    public void showDisplay() {
+        todoContent.setVisibility(View.VISIBLE);
+        editButton.setVisibility(View.VISIBLE);
+        doneButton.setVisibility(View.VISIBLE);
     }
 
 }

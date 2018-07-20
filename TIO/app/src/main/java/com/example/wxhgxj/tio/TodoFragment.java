@@ -55,21 +55,42 @@ public class TodoFragment extends Fragment {
         firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<TodoEvent, TodoViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull final TodoViewHolder holder, final int position, @NonNull TodoEvent model) {
-                //String currentTodoID = getRef(position).getKey();
-                String content = model.getContent();
+                final String currentTodoID = getRef(position).getKey();
+                final String content = model.getContent();
                 holder.setContent(content);
                 Button editTodo = holder.getEditButton();
                 Button doneTodo = holder.getDoneButton();
+                final EditText newContent = holder.getNewTodoContent();
+                final Button cancelButton = holder.getCancelButton();
+                final Button updateButton = holder.getUpdateButton();
                 editTodo.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        holder.showUpdateContent();
+                        newContent.setText(content);
+                        holder.showUpdate();
+                        holder.hideDisplay();
                     }
                 });
                 doneTodo.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         getRef(position).removeValue();
+                    }
+                });
+                updateButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        String newTodoContent = newContent.getText().toString();
+                        todoRef.child(currentTodoID).child("Content").setValue(newTodoContent);
+                        holder.showDisplay();
+                        holder.hideUpdate();
+                    }
+                });
+                cancelButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        holder.hideUpdate();
+                        holder.showDisplay();
                     }
                 });
             }
