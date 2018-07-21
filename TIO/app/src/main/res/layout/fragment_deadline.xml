@@ -6,9 +6,95 @@
     tools:context=".DeadlineFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="DEADLINE FRAGMENT" />
+        android:layout_height="match_parent">
 
+        <TextView
+            android:id="@+id/deadlineTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:text="Deadlines Need To Be Done"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="92dp"
+            tools:layout_editor_absoluteY="0dp" />
+
+        <Button
+            android:id="@+id/addDeadlineButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_toStartOf="@+id/cancelDeadlineButton"
+            android:text="Add New Deadline Event"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <EditText
+            android:id="@+id/newDeadlineEventInput"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_above="@+id/newDeadlineDate"
+            android:layout_alignParentStart="true"
+            android:ems="10"
+            android:hint="Detail..."
+            android:inputType="textPersonName"
+            android:visibility="gone" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/deadlineList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/newDeadlineEventInput"
+            android:layout_alignParentStart="true"
+            android:layout_below="@id/deadlineTitle"
+            android:background="@android:color/background_light"
+            tools:layout_editor_absoluteX="43dp">
+
+        </android.support.v7.widget.RecyclerView>
+
+        <TextView
+            android:id="@+id/deadlineInputTitle"
+            android:layout_width="86dp"
+            android:layout_height="45dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/newDeadlineEventInput"
+            android:text="Deadline Time"
+            android:textSize="18sp"
+            android:visibility="gone" />
+
+        <EditText
+            android:id="@+id/newDeadlineDate"
+            android:layout_width="194dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/addDeadlineButton"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="86dp"
+            android:ems="10"
+            android:hint="MM-dd-yyyy"
+            android:inputType="date"
+            android:visibility="gone" />
+
+        <EditText
+            android:id="@+id/newDeadlineTime"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/addDeadlineButton"
+            android:layout_alignParentEnd="true"
+            android:ems="10"
+            android:hint="HH:SS"
+            android:inputType="time"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/cancelDeadlineButton"
+            android:layout_width="207dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:text="Cancel"
+            android:visibility="gone" />
+
+    </RelativeLayout>
 </FrameLayout>

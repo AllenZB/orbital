@@ -47,12 +47,14 @@ public class UpdateEventActivity extends AppCompatActivity {
         currentEventRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                newEventTitle.setText(dataSnapshot.child("Title").getValue().toString());
-                newEventDate.setText(dataSnapshot.child("Date").getValue().toString());
-                newEventStartTime.setText(dataSnapshot.child("StartTime").getValue().toString());
-                newEventEndTime.setText(dataSnapshot.child("EndTime").getValue().toString());
-                newEventLocation.setText(dataSnapshot.child("Location").getValue().toString());
-                newEventDescription.setText(dataSnapshot.child("Description").getValue().toString());
+                if(dataSnapshot.getValue() != null) {
+                    newEventTitle.setText(dataSnapshot.child("Title").getValue().toString());
+                    newEventDate.setText(dataSnapshot.child("Date").getValue().toString());
+                    newEventStartTime.setText(dataSnapshot.child("StartTime").getValue().toString());
+                    newEventEndTime.setText(dataSnapshot.child("EndTime").getValue().toString());
+                    newEventLocation.setText(dataSnapshot.child("Location").getValue().toString());
+                    newEventDescription.setText(dataSnapshot.child("Description").getValue().toString());
+                }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {

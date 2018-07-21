@@ -1,7 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
+    <Button
+        android:id="@+id/updateDeadlineButton"
+        android:layout_width="205dp"
+        android:layout_height="35dp"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/editDeadlineContent"
+        android:text="Update"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/newDeadlineTimeTitle"
+        android:layout_width="113dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/editDeadlineButton"
+        android:text="New Deadline By :"
+        android:textSize="18sp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/deadlineContent"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/deadlineTime"
+        android:text="TextView"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/editDeadlineButton"
+        android:layout_width="205dp"
+        android:layout_height="35dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/deadlineContent"
+        android:text="Edit" />
+
+    <Button
+        android:id="@+id/doneDeadlineButton"
+        android:layout_width="205dp"
+        android:layout_height="35dp"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/deadlineContent"
+        android:text="Done"
+        android:visibility="visible" />
+
+    <EditText
+        android:id="@+id/editDeadlineContent"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/newDeadlineTimeTitle"
+        android:ems="10"
+        android:hint="new Content..."
+        android:inputType="textPersonName"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/cancelDeadlineButton"
+        android:layout_width="205dp"
+        android:layout_height="35dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/editDeadlineContent"
+        android:text="Cancel"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/deadlineTime"
+        android:layout_width="298dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="113dp"
+        android:text="TextView"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/deadlineTimeTitle"
+        android:layout_width="113dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:text="Deadline By :"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/editDeadlineDate"
+        android:layout_width="173dp"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/deadlineTime"
+        android:layout_below="@+id/editDeadlineButton"
+        android:ems="10"
+        android:inputType="date"
+        android:visibility="gone" />
+
+    <EditText
+        android:id="@+id/editDeadlineTime"
+        android:layout_width="124dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/newDeadlineTimeTitle"
+        android:ems="10"
+        android:inputType="time"
+        android:visibility="gone" />
 
 </RelativeLayout>

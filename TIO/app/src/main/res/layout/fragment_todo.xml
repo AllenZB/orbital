@@ -24,33 +24,17 @@
             tools:layout_editor_absoluteX="92dp"
             tools:layout_editor_absoluteY="0dp" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/todoList"
-            android:layout_width="match_parent"
-            android:layout_height="526dp"
-            android:layout_above="@id/newTodoEventInput"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@id/todoListTitle"
-            android:layout_marginBottom="-3dp"
-            android:background="@android:color/background_light"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/todoListTitle"
-            app:layout_constraintVertical_bias="1.0"
-            tools:layout_editor_absoluteX="43dp">
-
-        </android.support.v7.widget.RecyclerView>
-
         <Button
             android:id="@+id/addTodoButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
+            android:layout_toStartOf="@+id/cancelTodoButton"
             android:text="Add New Todo Event"
             tools:layout_editor_absoluteX="0dp" />
 
         <EditText
-            android:id="@+id/newTodoEventInput"
+            android:id="@+id/newDeadlineEventInput"
             android:layout_width="match_parent"
             android:layout_height="63dp"
             android:layout_above="@+id/addTodoButton"
@@ -59,6 +43,30 @@
             android:inputType="textPersonName"
             android:text="Name"
             android:visibility="gone" />
+
+        <Button
+            android:id="@+id/cancelTodoButton"
+            android:layout_width="207dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:text="Cancel"
+            android:visibility="gone" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/todoList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/newDeadlineEventInput"
+            android:layout_below="@id/todoListTitle"
+            android:layout_alignParentStart="true"
+            android:background="@android:color/background_light"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/todoListTitle"
+            app:layout_constraintVertical_bias="1.0"
+            tools:layout_editor_absoluteX="43dp">
+
+        </android.support.v7.widget.RecyclerView>
     </RelativeLayout>
 
 </FrameLayout>

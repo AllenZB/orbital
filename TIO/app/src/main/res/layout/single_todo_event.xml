@@ -4,7 +4,7 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/todoContent"
+        android:id="@+id/deadlineContent"
         android:layout_width="321dp"
         android:layout_height="63dp"
         android:layout_alignParentStart="true"
@@ -13,7 +13,7 @@
         android:textSize="18sp" />
 
     <Button
-        android:id="@+id/editTodobutton"
+        android:id="@+id/editDeadlineButton"
         android:layout_width="wrap_content"
         android:layout_height="35dp"
         android:layout_alignParentEnd="true"
@@ -24,16 +24,16 @@
         android:id="@+id/doneTodoButton"
         android:layout_width="wrap_content"
         android:layout_height="35dp"
-        android:layout_alignBottom="@+id/todoContent"
+        android:layout_alignBottom="@+id/deadlineContent"
         android:layout_alignParentEnd="true"
         android:text="Done" />
 
     <EditText
-        android:id="@+id/newTodoContent"
+        android:id="@+id/editDeadlineContent"
         android:layout_width="321dp"
         android:layout_height="64dp"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/todoContent"
+        android:layout_below="@+id/deadlineContent"
         android:ems="10"
         android:hint="new Content..."
         android:inputType="textPersonName"
@@ -43,7 +43,7 @@
         android:id="@+id/updateTodoEvent"
         android:layout_width="wrap_content"
         android:layout_height="35dp"
-        android:layout_alignBottom="@+id/newTodoContent"
+        android:layout_alignBottom="@+id/editDeadlineContent"
         android:layout_alignParentEnd="true"
         android:text="Update"
         android:visibility="gone" />
@@ -53,7 +53,7 @@
         android:layout_width="wrap_content"
         android:layout_height="35dp"
         android:layout_alignParentEnd="true"
-        android:layout_below="@+id/todoContent"
+        android:layout_below="@+id/deadlineContent"
         android:text="Cancel"
         android:visibility="gone" />
 </RelativeLayout>
