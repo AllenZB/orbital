@@ -61,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
         mainViewPager = (ViewPager)findViewById(R.id.mainViewPager);
         mainViewPager.setAdapter(mainPagerAdapter);
 
-
         //set the navigation bar
         final NavigationView navigationView = (NavigationView)findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(new OnNavigationItemSelectedListener() {
@@ -91,11 +90,6 @@ public class MainActivity extends AppCompatActivity {
                         Intent calendarIntent = new Intent(MainActivity.this, CalendarActivity.class);
                         calendarIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(calendarIntent);
-                        break;
-                    case R.id.testButton:
-                        Intent newEventIntent = new Intent(MainActivity.this, AddEventActivity.class);
-                        newEventIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(newEventIntent);
                         break;
                 }
                 return true;

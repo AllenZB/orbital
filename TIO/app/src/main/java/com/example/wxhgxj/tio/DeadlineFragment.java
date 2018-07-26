@@ -158,6 +158,7 @@ public class DeadlineFragment extends Fragment {
                     addDeadlineTitle.setVisibility(View.GONE);
                     addDeadlineDate.setVisibility(View.GONE);
                     addDeadlineTime.setVisibility(View.GONE);
+                    cancelDeadlineButton.setVisibility(View.GONE);
                     addDeadlineButton.setText("Add New Deadline Event");
                 }
             }

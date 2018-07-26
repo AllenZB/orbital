@@ -34,14 +34,14 @@
             tools:layout_editor_absoluteX="0dp" />
 
         <EditText
-            android:id="@+id/newDeadlineEventInput"
+            android:id="@+id/newTodoEventInput"
             android:layout_width="match_parent"
             android:layout_height="63dp"
             android:layout_above="@+id/addTodoButton"
+            android:hint="Content..."
             android:layout_alignParentStart="true"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name"
+            android:inputType="text"
             android:visibility="gone" />
 
         <Button
@@ -57,9 +57,9 @@
             android:id="@+id/todoList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/newDeadlineEventInput"
-            android:layout_below="@id/todoListTitle"
+            android:layout_above="@+id/newTodoEventInput"
             android:layout_alignParentStart="true"
+            android:layout_below="@id/todoListTitle"
             android:background="@android:color/background_light"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/todoListTitle"

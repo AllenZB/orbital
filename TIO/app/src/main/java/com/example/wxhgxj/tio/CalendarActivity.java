@@ -74,7 +74,7 @@ public class CalendarActivity extends AppCompatActivity {
                     dates.add(new CalendarDay(myDate));
                     calendar.addDecorator(new EventDecorator(Color.RED, dates));
                 }
-                //currentMonthIndex = today.getMonth();
+                currentMonthIndex = today.getMonth();
             }
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {

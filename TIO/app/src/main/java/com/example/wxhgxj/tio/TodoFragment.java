@@ -47,7 +47,7 @@ public class TodoFragment extends Fragment {
         todoRef = FirebaseDatabase.getInstance().getReference("Todo").child(currentUid);
         addTodo = (Button)todoView.findViewById(R.id.addTodoButton);
         cancelTodo = (Button)todoView.findViewById(R.id.cancelTodoButton);
-        newTodoInput = (EditText)todoView.findViewById(R.id.newDeadlineEventInput);
+        newTodoInput = (EditText)todoView.findViewById(R.id.newTodoEventInput);
         todoList.setHasFixedSize(true);
         todoList.setLayoutManager(new LinearLayoutManager(getContext()));
         Query query = todoRef;
@@ -77,6 +77,9 @@ public class TodoFragment extends Fragment {
                     @Override
                     public void onClick(View view) {
                         getRef(position).removeValue();
+                        firebaseRecyclerAdapter.notifyItemRemoved(position);
+                        firebaseRecyclerAdapter.notifyItemRangeChanged(position, getItemCount());
+                        firebaseRecyclerAdapter.notifyDataSetChanged();
                     }
                 });
                 updateButton.setOnClickListener(new View.OnClickListener() {
@@ -117,6 +120,7 @@ public class TodoFragment extends Fragment {
                     String content = newTodoInput.getText().toString();
                     todoRef.push().child("Content").setValue(content);
                     newTodoInput.setVisibility(View.GONE);
+                    cancelTodo.setVisibility(View.GONE);
                     addTodo.setText("Add New Todo Event");
                 }
             }

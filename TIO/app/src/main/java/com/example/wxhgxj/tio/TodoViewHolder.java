@@ -21,10 +21,10 @@ public class TodoViewHolder extends RecyclerView.ViewHolder{
         super(itemView);
 
         todoView = itemView;
-        todoContent = (TextView)todoView.findViewById(R.id.deadlineContent);
-        editButton = (Button)todoView.findViewById(R.id.editDeadlineButton);
+        todoContent = (TextView)todoView.findViewById(R.id.todoContent);
+        editButton = (Button)todoView.findViewById(R.id.editTodoButton);
         doneButton = (Button)todoView.findViewById(R.id.doneTodoButton);
-        newTodoContent = (EditText)todoView.findViewById(R.id.editDeadlineContent);
+        newTodoContent = (EditText)todoView.findViewById(R.id.editTodoContent);
         updateButton = (Button)todoView.findViewById(R.id.updateTodoEvent);
         cancelButton = (Button)todoView.findViewById(R.id.cancelTodoInput);
     }

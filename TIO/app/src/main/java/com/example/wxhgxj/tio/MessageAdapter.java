@@ -41,8 +41,10 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageViewHolder> {
         String userFrom = msg.getFrom();
         TextView msgContent = holder.getMsgContentTextView();
         if(currentUid.equals(userFrom)) {
+            msgContent.setBackgroundColor(Color.WHITE);
             msgContent.setTextColor(Color.parseColor("#000000"));
         } else {
+            msgContent.setBackgroundColor(Color.YELLOW);
             msgContent.setTextColor(Color.parseColor("#fff17a0a"));
         }
         holder.setTime(msg.getTime());
